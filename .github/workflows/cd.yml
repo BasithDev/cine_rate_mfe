@@ -23,25 +23,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push all MFE Docker images
+      - name: Build and push header MFE
         run: |
-          cd mfes
-          pwd
-          ls -la
-          for dir in */ ; do
-            dir=${dir%/}
-            echo "Processing directory: $dir"
-            ls -la $dir
-            if [ -f "$dir/Dockerfile" ]; then
-              echo "Dockerfile exists in $dir"
-            else
-              echo "Dockerfile NOT found in $dir"
-            fi
-            
-            IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mfe-${dir}
+          cd mfes/header
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-header:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-header:latest
 
-            echo "Building and pushing $IMAGE_NAME"
-            # Try with explicit path
-            docker build -t $IMAGE_NAME:latest ./$dir
-            docker push $IMAGE_NAME:latest
-          done
+      - name: Build and push home MFE
+        run: |
+          cd mfes/home
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-home:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-home:latest
