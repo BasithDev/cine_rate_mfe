@@ -34,3 +34,33 @@ jobs:
           cd mfes/home
           docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-home:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/mfe-home:latest
+
+      - name: Build and push info_page MFE
+        run: |
+          cd mfes/info_page
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-info_page:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-info_page:latest
+
+      - name: Build and push review_page MFE
+        run: |
+          cd mfes/review_page
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-review_page:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-review_page:latest
+
+      - name: Build and push search_result MFE
+        run: |
+          cd mfes/search_result
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-search_result:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-search_result:latest
+
+      - name: Build and push watchlist MFE
+        run: |
+          cd mfes/watchlist
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-watchlist:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-watchlist:latest
+
+      - name: Build and push host MFE
+        run: |
+          cd mfes/host
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/mfe-host:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/mfe-host:latest
