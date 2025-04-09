@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  host:
+    build: ./host
+    ports:
+      - "5000:80"
+    restart: unless-stopped
+
+  header:
+    build: ./header
+    ports:
+      - "5001:80"
+    restart: unless-stopped
+
+  home:
+    build: ./home
+    ports:
+      - "5002:80"
+    restart: unless-stopped
+
+  info_page:
+    build: ./info_page
+    ports:
+      - "5005:80"
+    restart: unless-stopped
+
+  review_page:
+    build: ./review_page
+    ports:
+      - "5006:80"
+    restart: unless-stopped
+
+  search_result:
+    build: ./search_result
+    ports:
+      - "5003:80"
+    restart: unless-stopped
+
+  watchlist:
+    build: ./watchlist
+    ports:
+      - "5004:80"
+    restart: unless-stopped
