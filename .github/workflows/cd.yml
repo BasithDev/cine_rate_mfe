@@ -26,12 +26,22 @@ jobs:
       - name: Build and push all MFE Docker images
         run: |
           cd mfes
+          pwd
+          ls -la
           for dir in */ ; do
             dir=${dir%/}
+            echo "Processing directory: $dir"
+            ls -la $dir
+            if [ -f "$dir/Dockerfile" ]; then
+              echo "Dockerfile exists in $dir"
+            else
+              echo "Dockerfile NOT found in $dir"
+            fi
+            
             IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mfe-${dir}
 
             echo "Building and pushing $IMAGE_NAME"
-            # Change to directory and build from there
-            (cd $dir && docker build -t $IMAGE_NAME:latest .)
+            # Try with explicit path
+            docker build -t $IMAGE_NAME:latest ./$dir
             docker push $IMAGE_NAME:latest
           done
