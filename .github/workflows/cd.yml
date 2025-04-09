@@ -28,9 +28,9 @@ jobs:
           cd mfes
           for dir in */ ; do
             dir=${dir%/}
-            IMAGE_NAME=your-dockerhub-username/mfe-${dir}
+            IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mfe-${dir}
 
             echo "Building and pushing $IMAGE_NAME"
-            docker build -t $IMAGE_NAME:latest ./$dir
+            docker build -t $IMAGE_NAME:latest -f ./$dir/Dockerfile ./$dir
             docker push $IMAGE_NAME:latest
           done
