@@ -31,6 +31,7 @@ jobs:
             IMAGE_NAME=${{ secrets.DOCKER_USERNAME }}/mfe-${dir}
 
             echo "Building and pushing $IMAGE_NAME"
-            docker build -t $IMAGE_NAME:latest -f ./$dir/Dockerfile ./$dir
+            # Build from the subdirectory directly, where the Dockerfile exists
+            docker build -t $IMAGE_NAME:latest ./$dir
             docker push $IMAGE_NAME:latest
           done
