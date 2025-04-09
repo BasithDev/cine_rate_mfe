@@ -24,9 +24,6 @@ yarn-error.log*
 # System files
 Thumbs.db
 
-# Docker
-**/Dockerfile
-**/nginx.conf
 
 # Mac & Linux
 *.swp
